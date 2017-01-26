@@ -1,1 +1,7 @@
 daily_session_document: "https://docs.google.com/document/d/1giygRWUAkIjI2aSjeAnmstf1EcdPLukYecgXOsvCvZw/edit"
+attendance:
+  class_days:
+    tuesday:
+      start_time: '08:50'
+    wednesday:
+      start_time: '08:50'
