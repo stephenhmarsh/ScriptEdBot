@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126205758) do
+ActiveRecord::Schema.define(version: 20170126220358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20170126205758) do
     t.integer  "user_id"
     t.text     "ip_address"
     t.index ["user_id"], name: "index_attendances_on_user_id", using: :btree
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.decimal  "value"
+    t.string   "pointable_type"
+    t.integer  "pointable_id"
+    t.integer  "user_id"
+    t.index ["pointable_type", "pointable_id"], name: "index_points_on_pointable_type_and_pointable_id", using: :btree
+    t.index ["user_id"], name: "index_points_on_user_id", using: :btree
   end
 
 end
