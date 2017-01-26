@@ -1,11 +1,2 @@
-class Attendance
-  # timestamps
-  # username via github
-  # ip address
+class Attendance < ActiveRecord::Base
 end
-
-
-
-
-# class has many students
-# class has many staff
