@@ -1,6 +1,6 @@
-school_name: "Green School"
+school_name: <%= ENV['SCRIPTEDBOT_SCHOOL_NAME'] %>
 links:
-  daily_session_document: "https://docs.google.com/document/d/1giygRWUAkIjI2aSjeAnmstf1EcdPLukYecgXOsvCvZw/edit"
+  daily_session_document: <%= ENV['SCRIPTEDBOT_DAILY_SESSION_LINK'] %>
   reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
 attendance:
   class_days:
