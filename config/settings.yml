@@ -1,9 +1,11 @@
-daily_session_document: "https://docs.google.com/document/d/1giygRWUAkIjI2aSjeAnmstf1EcdPLukYecgXOsvCvZw/edit"
+links:
+  daily_session_document: "https://docs.google.com/document/d/1giygRWUAkIjI2aSjeAnmstf1EcdPLukYecgXOsvCvZw/edit"
+  reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
 attendance:
   class_days:
     tuesday:
       start_time: '08:50'
     wednesday:
       start_time: '08:50'
-  lateness_cutoff_minutes: 10
-  absence_cutoff_minutes: 30
+  lateness_threshold: 10
+  absence_threshold: 30

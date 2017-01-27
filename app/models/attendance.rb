@@ -1,15 +1,28 @@
 class Attendance < ActiveRecord::Base
-  after_initialize :set_scheduled_start_time
-  before_commit :issue_points, on: :create
+  before_create :set_scheduled_start_time
+  before_create :set_late
+  before_create :issue_points
+
   has_one :point, as: :pointable, dependent: :destroy
+
+  def late?
+    late.nil? ? set_late : late
+  end
 
   private
 
-  def scheduled_start_time
-    class_start_time ? class_start_time : start_time_today
+  def set_late
+    late = Time.now > (scheduled_start_time + Settings.attendance.lateness_threshold.minutes)
+  end
+
+  def set_scheduled_start_time
+    scheduled_start_time = get_start_time_today
   end
 
   def issue_points
-    # Point.create(value:)
+    if class_today?
+      point = Point.new(value: 1)
+      point.value += 1 unless late?
+    end
   end
 end

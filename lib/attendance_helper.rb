@@ -10,12 +10,12 @@ module AttendanceHelper
     context >
   end
 
-  def start_time_today
-    @start_time_today ||= Settings
-        .attendance
-        .class_days
-        .send(current_day_of_the_week)
-        .try(:start_time)
+  def get_start_time_today
+    Settings
+      .attendance
+      .class_days
+      .send(current_day_of_the_week)
+      .try(:start_time)
   end
 
   def current_day_of_the_week

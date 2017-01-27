@@ -9,9 +9,7 @@
   </head>
 
   <body>
-    <header>
-      <%= link_to 'Daily Session Document', Settings.daily_session_document %>
-    </header>
+    <%= render partial: 'shared/header' %>
     <%= yield %>
   </body>
 </html>
