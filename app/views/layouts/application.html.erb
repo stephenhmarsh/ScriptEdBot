@@ -12,7 +12,11 @@
     <%= render partial: 'shared/header' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+    <% if current_user %>
+      <h1>Hello, <%= current_user.name %>
+    <% else %>
+      <%= link_to "Sign in with GitHub", user_github_omniauth_authorize_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
