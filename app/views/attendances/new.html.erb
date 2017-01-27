@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <center>
+        <% if current_user %>
+          <h1>Hello, <%= current_user.name %>
+        <% else %>
+          <%= render partial: 'shared/login_with_github' %>
+        <% end %>
+      </center>
+    </div>
+  </div>
+</div>
+
+
