@@ -5,3 +5,5 @@ attendance:
       start_time: '08:50'
     wednesday:
       start_time: '08:50'
+  lateness_cutoff_minutes: 10
+  absence_cutoff_minutes: 30

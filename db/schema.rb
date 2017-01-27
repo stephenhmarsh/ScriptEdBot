@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126220358) do
+ActiveRecord::Schema.define(version: 20170126225624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attendances", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.text     "ip_address"
+    t.datetime "class_start_time"
+    t.boolean  "late"
     t.index ["user_id"], name: "index_attendances_on_user_id", using: :btree
   end
 
