@@ -3,7 +3,7 @@
     <div class="col">
       <center>
         <% if current_user %>
-          <h1>Hello, <%= current_user.name %>
+          <%= render partial: 'hello' %>
         <% else %>
           <%= render partial: 'shared/login_with_github' %>
         <% end %>

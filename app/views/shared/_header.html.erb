@@ -7,6 +7,9 @@
     <div class="navbar-nav">
       <%= link_to 'Daily Session Document', Settings.links.daily_session_document, class: 'nav-item nav-link' %>
       <%= link_to 'Reference Table', Settings.links.reference_table, class: 'nav-item nav-link' %>
+      <% if user_signed_in? %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
+      <% end %>
     </div>
   </div>
 </nav>

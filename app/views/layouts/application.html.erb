@@ -10,8 +10,20 @@
 
   <body>
     <%= render partial: 'shared/header' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if [notice, alert].any? %>
+      <div class="container-fluid">
+        <% if alert %>
+          <div class="alert alert-warning" role="alert">
+            <p class="alert"><%= alert %></p>
+          </div>
+        <% end %>
+        <% if notice %>
+          <div class="alert alert-info" role="alert">
+            <p class="notice"><%= notice %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

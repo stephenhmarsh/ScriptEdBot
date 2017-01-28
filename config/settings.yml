@@ -1,4 +1,6 @@
 school_name: <%= ENV['SCRIPTEDBOT_SCHOOL_NAME'] %>
+github_client_id: <%= ENV['GITHUB_CLIENT_ID'] %>
+github_client_secret: <%= ENV['GITHUB_CLIENT_SECRET'] %>
 links:
   daily_session_document: <%= ENV['SCRIPTEDBOT_DAILY_SESSION_LINK'] %>
   reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
