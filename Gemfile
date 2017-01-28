@@ -25,7 +25,7 @@ gem 'rspec-rails', groups: [:development, :test]
 gem 'sass-rails', '~> 5.0'
 gem 'spring', group: :development
 gem 'spring-watcher-listen', '~> 2.0.0', group: :development
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'web-console', '>= 3.3.0', group: :development
 
