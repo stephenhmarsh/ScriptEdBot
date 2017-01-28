@@ -4,6 +4,8 @@ This is an app that will take class attendance with GitHub oAuth.
 
 No student information should be public through the app.
 
+Example: [GreenSchoolBot](http://greenschoolbot.herokuapp.com/)
+
 ### Pull Requests Welcome!
 
 Feature Ideas/Wishlist:
