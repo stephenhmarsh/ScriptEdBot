@@ -1,4 +1,4 @@
-class Attendance < ActiveRecord::Base
+class Attendance < ApplicationRecord
   before_create :set_scheduled_start_time
   before_create :set_late
   before_create :issue_points
