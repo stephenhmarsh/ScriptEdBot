@@ -3,7 +3,7 @@ class Attendance < ApplicationRecord
   before_validation :set_late, on: :create
   before_validation :issue_points, on: :create
 
-  valides_presence_of :user, :ip_address, :browser, :scheduled_start_time
+  validates_presence_of :user, :ip_address, :browser, :scheduled_start_time
   validates_associated :point
   validates :there_is_class_today?, on: :create
   validates :attended_yet_today?, on: :create
