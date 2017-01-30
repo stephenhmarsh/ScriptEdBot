@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 #   "https://github.com/#{repo_name}.git"
 # end
 
+gem 'airbrake', '~> 5.7'
 gem 'better_errors', group: :development
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'binding_of_caller', group: :development
