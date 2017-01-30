@@ -5,8 +5,8 @@ class Attendance < ApplicationRecord
 
   validates_presence_of :user, :ip_address, :browser, :scheduled_start_time
   validates_associated :point
-  validates :there_is_class_today?, on: :create
-  validates :attended_yet_today?, on: :create
+  validate :there_is_class_today?, on: :create
+  validate :attended_yet_today?, on: :create
 
   belongs_to :user
 
@@ -14,6 +14,8 @@ class Attendance < ApplicationRecord
   accepts_nested_attributes_for :point
 
   scope :created_today, -> { where("created_at >= :start_time AND created_at <= :end_time", {start_time: Date.today.beginning_of_day, end_time: Date.today.end_of_day}) }
+
+  include ::AttendanceHelper
 
   def valid_attendance?
     there_is_class_today? && within_attendance_window? && !attended_yet_today?
@@ -29,7 +31,7 @@ class Attendance < ApplicationRecord
   end
 
   def there_is_class_today?
-    Settings.attendance.class_days.keys.include?(current_day_of_the_week)
+    Settings.attendance.class_days.keys.include?(current_day_name)
   end
 
   def within_attendance_window?
@@ -47,14 +49,6 @@ class Attendance < ApplicationRecord
 
   def add_punctuality_points
     point.value += 1 if on_time?
-  end
-
-  def get_start_time_today
-    Settings
-      .attendance
-      .class_days
-      .send(Time.now.strftime('%A').downcase.to_sym)
-      .try(:start_time)
   end
 
   private
