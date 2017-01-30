@@ -10,8 +10,10 @@ Example: [GreenSchoolBot](http://greenschoolbot.herokuapp.com/)
 
 Feature Ideas/Wishlist:
 
-* Approving new accounts for privacy 
 * Teams and team points
+* Approving new accounts for privacy 
+  * ie, so randos can't join our class when we have teams setup
+* Email/text nags if student late/absent?
 * Non-student accounts
 * Class Leaderboard
 * Rankings on profile page
