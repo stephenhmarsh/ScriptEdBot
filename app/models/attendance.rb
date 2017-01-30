@@ -43,6 +43,8 @@ class Attendance < ApplicationRecord
     user.attendances.created_today.count > 0
   end
 
+  private
+
   def add_attendance_points
     point.value += 1 if valid_attendance?
   end
@@ -50,8 +52,6 @@ class Attendance < ApplicationRecord
   def add_punctuality_points
     point.value += 1 if on_time?
   end
-
-  private
 
   def set_late
     late = there_is_class_today? && Time.now > (scheduled_start_time + Settings.attendance.lateness_threshold.minutes)

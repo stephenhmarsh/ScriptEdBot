@@ -1,4 +1,3 @@
-
   module AttendanceHelper
 
     def get_start_time_today

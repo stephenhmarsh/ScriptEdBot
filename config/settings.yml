@@ -1,7 +1,9 @@
 airbrake:
   project_id: <%= ENV['AIRBRAKE_PROJECT_ID'] %>
   project_key: <%= ENV['AIRBRAKE_API_KEY'] %>
-school_name: <%= ENV['SCRIPTEDBOT_SCHOOL_NAME'] %>
+school:
+  name: <%= ENV['SCRIPTEDBOT_SCHOOL_NAME'] %>
+  bot_pic: <%= ENV['SCRIPTEDBOT_PIC'] || 'greenschoolbot.jpg' %>
 github_client_id: <%= ENV['GITHUB_CLIENT_ID'] %>
 github_client_secret: <%= ENV['GITHUB_CLIENT_SECRET'] %>
 links:
