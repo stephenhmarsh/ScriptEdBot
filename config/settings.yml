@@ -10,5 +10,7 @@ attendance:
       start_time: '08:50'
     wednesday:
       start_time: '08:50'
-  lateness_threshold: 0
-  absence_threshold: 30
+  lateness_threshold: 2
+  attendance_threshold:
+    start: 45
+    end: 30

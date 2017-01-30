@@ -1,18 +1,66 @@
 class Attendance < ApplicationRecord
-  before_create :set_scheduled_start_time
-  before_create :set_late
-  before_create :issue_points
+  before_validation :set_scheduled_start_time, on: :create
+  before_validation :set_late, on: :create
+  before_validation :issue_points, on: :create
+
+  valides_presence_of :user, :ip_address, :browser, :scheduled_start_time
+  validates_associated :point
+  validates :there_is_class_today?, on: :create
+  validates :attended_yet_today?, on: :create
+
+  belongs_to :user
 
   has_one :point, as: :pointable, dependent: :destroy
+  accepts_nested_attributes_for :point
+
+  scope :created_today, -> ( where("created_at >= :start_time AND created_at <= :end_time", {start_time: Date.today.beginning_of_day, end_time: Date.today.end_of_day}) )
+
+  def valid_attendance?
+    there_is_class_today? && within_attendance_window? && !attended_yet_today?
+  end
 
   def late?
-    late.nil? ? set_late : late
+    return set_late if new_record?
+    late
+  end
+
+  def on_time?
+    !late?
+  end
+
+  def there_is_class_today?
+    Settings.attendance.class_days.keys.include?(current_day_of_the_week)
+  end
+
+  def within_attendance_window?
+    (Time.now >= Settings.attendance.attendance_threshold.start.minutes &&
+      Time.now <= Settings.attendance.attendance_threshold.end.minutes)
+  end
+
+  def attended_yet_today?
+    user.attendances.created_today.count > 0
+  end
+
+  def add_attendance_points
+    point.value += 1 if valid_attendance?
+  end
+
+  def add_punctuality_points
+    point.value += 1 if on_time?
+  end
+
+  def get_start_time_today
+    Settings
+      .attendance
+      .class_days
+      .send(Time.now.strftime('%A').downcase.to_sym)
+      .try(:start_time)
   end
 
   private
 
   def set_late
-    late = Time.now > (scheduled_start_time + Settings.attendance.lateness_threshold.minutes)
+    late = there_is_class_today? && Time.now > (scheduled_start_time + Settings.attendance.lateness_threshold.minutes)
   end
 
   def set_scheduled_start_time
@@ -20,9 +68,10 @@ class Attendance < ApplicationRecord
   end
 
   def issue_points
-    if class_today?
-      point = Point.new(value: 1)
-      point.value += 1 unless late?
+    if there_is_class_today? && !attended_yet_today?
+      point = Point.new
+      add_attendance_points
+      add_punctuality_points
     end
   end
 end
