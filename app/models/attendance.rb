@@ -13,7 +13,7 @@ class Attendance < ApplicationRecord
   has_one :point, as: :pointable, dependent: :destroy
   accepts_nested_attributes_for :point
 
-  scope :created_today, -> ( where("created_at >= :start_time AND created_at <= :end_time", {start_time: Date.today.beginning_of_day, end_time: Date.today.end_of_day}) )
+  scope :created_today, -> { where("created_at >= :start_time AND created_at <= :end_time", {start_time: Date.today.beginning_of_day, end_time: Date.today.end_of_day}) }
 
   def valid_attendance?
     there_is_class_today? && within_attendance_window? && !attended_yet_today?
