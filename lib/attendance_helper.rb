@@ -1,11 +1,19 @@
   module AttendanceHelper
 
-    def get_start_time_today
+    def start_hour
       Settings
         .attendance
         .class_days
         .send(current_day_name)
-        .try(:start_time)
+        .try(:hour)
+    end
+
+    def start_minute
+      Settings
+        .attendance
+        .class_days
+        .send(current_day_name)
+        .try(:hour)
     end
 
     def current_day_name

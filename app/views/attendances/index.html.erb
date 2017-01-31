@@ -1,16 +1,27 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-
-
-
-
-
       <center>
         <%= render partial: 'hello' %>
       </center>
 
-      <%= current_user.attendances.inspect %>
+      <h3>Your Class Attendance</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>Day</td>
+            <td>Class Time</td>
+            <td>Time In</td>
+            <td>On Time?</td>
+            <td>Points</td>
+            <td>IP Address</td>
+            <td>Browser</td>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: @attendances %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

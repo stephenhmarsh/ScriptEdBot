@@ -1,5 +1,5 @@
 class Attendance < ApplicationRecord
-  before_validation :set_scheduled_start_time, on: :create
+  before_validation :get_start_time, on: :create
   before_validation :set_late, on: :create
   before_validation :issue_points, on: :create
 
@@ -40,8 +40,8 @@ class Attendance < ApplicationRecord
   end
 
   def within_attendance_window?
-    (Time.now >= Settings.attendance.attendance_threshold.start.minutes &&
-      Time.now <= Settings.attendance.attendance_threshold.end.minutes)
+    (Time.now >= (get_start_time - 45.minutes) &&
+      Time.now <= (get_start_time + 30.minutes))
   end
 
   def attended_yet_today?
@@ -53,27 +53,34 @@ class Attendance < ApplicationRecord
     end
   end
 
+  def minutes_late
+    ((created_at - scheduled_start_time) / 60).to_i
+  end
+
   private
 
   def add_attendance_points
-    point.value += 1 if valid_attendance?
+    100.times { logger.info "running add_attendance - #{valid_attendance?}"}
+    100.times { logger.info "#{there_is_class_today?} && #{within_attendance_window?} && #{!attended_yet_today?}"}
+    self.point.value += 1 if valid_attendance?
   end
 
   def add_punctuality_points
-    point.value += 1 if on_time?
+    self.point.value += 1 if on_time?
   end
 
   def set_late
-    late = there_is_class_today? && Time.now > (scheduled_start_time + Settings.attendance.lateness_threshold.minutes)
+    self.late = Time.now > (get_start_time + Settings.attendance.lateness_threshold.minutes)
   end
 
-  def set_scheduled_start_time
-    scheduled_start_time = get_start_time_today
+  def get_start_time
+    self.scheduled_start_time ||=
+      Time.new(Date.today.year, Date.today.month, Date.today.day, start_hour, start_minute)
   end
 
   def issue_points
     if there_is_class_today? && !attended_yet_today?
-      point = Point.new
+      self.point = Point.new(pointable: self, value: 0)
       add_attendance_points
       add_punctuality_points
     end

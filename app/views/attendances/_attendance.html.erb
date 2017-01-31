@@ -1,9 +1,12 @@
-<tr class="<%= attendance.on_time? 'table-success': 'table-danger' %>">
-  <td><!-- day -->                  <%= attendance.created_at.day %></td>
-  <td><!-- scheduled start time --> <%= attendance.scheduled_start_time %></td>
-  <td><!-- time -->                 <%= attendance.created_at %></td>
-  <td><!-- status -->               <%= attendance.on_time? 'On Time!' : 'Late!' %></td>
-  <td><!-- points -->               <%= attendance.points %></td>
-  <td><!-- ip address -->           <%= attendance.ip_address %></td>
-  <td><!-- browser/sys -->          <%= attendance.browser %></td>
+<tr class="<%= attendance.on_time? ? 'table-success': 'table-danger' %>">
+  <td><%= attendance.created_at.strftime("%a") %></td>
+  <td><%= attendance.scheduled_start_time %></td>
+  <td><%= attendance.created_at %></td>
+  <td>
+    <%= attendance.on_time? ? 'On Time!' : 'Late!' %>
+    <%= attendance.late? ? "(#{attendance.minutes_late}mins)" : nil %>
+  </td>
+  <td><%= attendance.point.value.to_i %></td>
+  <td><%= attendance.ip_address %></td>
+  <td><%= pretty_browser(attendance.browser) %></td>
 </tr>
