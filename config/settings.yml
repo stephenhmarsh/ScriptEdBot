@@ -1,3 +1,4 @@
+time_zone: <%= ENV['SCRIPTED_BOT_TIME_ZONE'] || 'America/New_York' %>
 airbrake:
   project_id: <%= ENV['AIRBRAKE_PROJECT_ID'] %>
   project_key: <%= ENV['AIRBRAKE_API_KEY'] %>
@@ -10,11 +11,12 @@ links:
   daily_session_document: <%= ENV['SCRIPTEDBOT_DAILY_SESSION_LINK'] %>
   reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
 attendance:
+  early_threshold: <%= ENV['SCRIPTED_BOT_EARLY_THRESHOLD'] || 45 %>
+  late_threshold: <%= ENV['SCRIPTED_BOT_LATE_THRESHOLD'] || 5 %>
   class_days:
     tuesday:
-      hour: 8
-      minute: 50
+      hour: 11
+      minute: 0
     wednesday:
       hour: 8
       minute: 50
-  lateness_threshold: 2
