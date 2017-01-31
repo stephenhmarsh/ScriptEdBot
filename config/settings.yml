@@ -11,9 +11,6 @@ links:
   reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
 attendance:
   class_days:
-    monday:
-      hour: 23
-      minute: 15
     tuesday:
       hour: 8
       minute: 50

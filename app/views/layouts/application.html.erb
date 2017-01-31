@@ -24,7 +24,9 @@
         <% end %>
         <% if flash[:errors] %>
           <div class="alert alert-danger" role="error">
-            <span class="error"><%= flash[:errors] %></span>
+            <% flash[:errors].each do |error| %>
+              <span class="error"><%= error.flatten.last['message'] %></span>
+            <% end %>
           </div>
         <% end %>
       </div>

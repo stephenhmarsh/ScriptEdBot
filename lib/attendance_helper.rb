@@ -13,7 +13,7 @@
         .attendance
         .class_days
         .send(current_day_name)
-        .try(:hour)
+        .try(:minute)
     end
 
     def current_day_name

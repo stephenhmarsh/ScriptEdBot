@@ -13,7 +13,7 @@ class Attendance < ApplicationRecord
   has_one :point, as: :pointable, dependent: :destroy
   accepts_nested_attributes_for :point
 
-  scope :created_today, -> { where("created_at >= :start_time AND created_at <= :end_time", {start_time: Date.today.beginning_of_day, end_time: Date.today.end_of_day}) }
+  scope :created_today, -> { where("created_at >= :start_time AND created_at <= :end_time", {start_time: Time.now.beginning_of_day, end_time: Time.now.end_of_day}) }
 
   include ::AttendanceHelper
 
@@ -40,8 +40,11 @@ class Attendance < ApplicationRecord
   end
 
   def within_attendance_window?
-    (Time.now >= (get_start_time - 45.minutes) &&
-      Time.now <= (get_start_time + 30.minutes))
+    not_too_early = Time.now >= (get_start_time - 45.minutes)
+    not_too_late = Time.now <= (get_start_time + 30.minutes)
+    errors.add(:too_late, message: "Sorry but you're too late for class to count as attendance. :(") unless not_too_late
+    errors.add(:too_early, message: "Sorry but you're too early for class, try later.") unless not_too_early
+    return (not_too_early && not_too_late)
   end
 
   def attended_yet_today?
@@ -66,7 +69,7 @@ class Attendance < ApplicationRecord
   end
 
   def add_punctuality_points
-    self.point.value += 1 if on_time?
+    self.point.value += 1 if (valid_attendance? && on_time?)
   end
 
   def set_late
