@@ -14,12 +14,12 @@
       <div class="container-fluid">
         <% if alert %>
           <div class="alert alert-warning" role="alert">
-            <p class="alert"><%= alert %></p>
+            <span class="alert"><%= alert %></span>
           </div>
         <% end %>
         <% if notice %>
-          <div class="alert alert-info" role="alert">
-            <p class="notice"><%= notice %></p>
+          <div class="alert alert-info" role="notice">
+            <span class="notice"><%= notice %></span>
           </div>
         <% end %>
       </div>
