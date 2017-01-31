@@ -3,7 +3,7 @@ class Attendance < ApplicationRecord
   before_validation :set_late, on: :create
   before_validation :issue_points, on: :create
 
-  validates_presence_of :user, :ip_address, :browser, :scheduled_start_time
+  validates_presence_of :user, :ip_address, :browser
   validates_associated :point
   validate :there_is_class_today?, on: :create
   validate :attended_yet_today?, on: :create
@@ -31,7 +31,12 @@ class Attendance < ApplicationRecord
   end
 
   def there_is_class_today?
-    Settings.attendance.class_days.keys.include?(current_day_name)
+    if Settings.attendance.class_days.keys.include?(current_day_name)
+      true
+    else
+      errors.add(:no_class_today, message: "Thanks for logging in, but there's no class today!")
+      false
+    end
   end
 
   def within_attendance_window?
@@ -40,7 +45,12 @@ class Attendance < ApplicationRecord
   end
 
   def attended_yet_today?
-    user.attendances.created_today.count > 0
+    if user.attendances.created_today.count > 0
+      errors.add(:already_attended, message: "Thanks for logging in, but you've already attended class today. No points. :(")
+      true
+    else
+      false
+    end
   end
 
   private

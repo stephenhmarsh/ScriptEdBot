@@ -4,9 +4,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
+      @attendance = Attendance.create(user: @user, ip_address: request.remote_ip, browser: current_browser)
+      flash[:errors] = @attendance.errors if @attendance.errors.any?
+      sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: "github") if is_navigational_format?
-      # flash[:attendances] = "Also you got points?"
     else
       session["devise.github_data"] = request.env["omniauth.auth"]
       redirect_to new_user_registration_url
