@@ -42,7 +42,7 @@ class Attendance < ApplicationRecord
   def within_attendance_window?
     not_too_early = Time.now.in_time_zone(Settings.time_zone) >= (get_start_time - 45.minutes)
     not_too_late = Time.now.in_time_zone(Settings.time_zone) <= (get_start_time + 30.minutes)
-    errors.add(:too_late, message: "Sorry but you're too late for class to count as attendance. :(") unless not_too_late
+    errors.add(:too_late, message: "Sorry but you're too late for class to count as attendance. :( <br> debugging: #{Time.now} vs. #{get_start_time}") unless not_too_late
     errors.add(:too_early, message: "Sorry but you're too early for class, try later.") unless not_too_early
     return (not_too_early && not_too_late)
   end
