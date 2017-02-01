@@ -1,12 +1,13 @@
-<tr class="<%= attendance.on_time? ? 'table-success': 'table-danger' %>">
-  <td><%= attendance.created_at.strftime("%a") %></td>
-  <td><%= attendance.scheduled_start_time %></td>
-  <td><%= attendance.created_at %></td>
+<tr class="<%= attendance.on_time? ? 'table-success': 'table-danger' %> text-center">
+  <td><%= attendance.created_at.in_time_zone(Settings.time_zone).strftime("%a %b %d, %Y") %></td>
+  <td><%= attendance.scheduled_start_time.in_time_zone(Settings.time_zone).strftime("%I:%M %p") %></td>
+  <td><%= attendance.created_at.in_time_zone(Settings.time_zone).strftime("%I:%M:%S%6N %p ") %></td>
   <td>
-    <%= attendance.on_time? ? 'On Time!' : 'Late!' %>
+    <%= attendance.on_time? ? raw('On Time! <kbd class="bonus-point">+1pt</kbd>') : 'Late!' %>
     <%= attendance.late? ? "(#{attendance.minutes_late}mins)" : nil %>
   </td>
-  <td><%= attendance.point.value.to_i %></td>
+  <td><%= raw "<kbd>#{pluralize(attendance.point.value.to_i, 'pt')}</kbd>" %></td>
   <td><%= attendance.ip_address %></td>
   <td><%= pretty_browser(attendance.browser) %></td>
 </tr>
+

@@ -4,7 +4,7 @@ airbrake:
   project_key: <%= ENV['AIRBRAKE_API_KEY'] %>
 school:
   name: <%= ENV['SCRIPTEDBOT_SCHOOL_NAME'] %>
-  bot_pic: <%= ENV['SCRIPTEDBOT_PIC'] || 'greenschoolbot.jpg' %>
+  bot_pic: <%= ENV['SCRIPTEDBOT_PIC'] || 'greenschoolbot_small.gif' %>
 github_client_id: <%= ENV['GITHUB_CLIENT_ID'] %>
 github_client_secret: <%= ENV['GITHUB_CLIENT_SECRET'] %>
 links:
@@ -12,11 +12,11 @@ links:
   reference_table: "https://github.com/ScriptEdcurriculum/curriculum2016/blob/master/resources/ScriptEdReferenceTable2016.pdf"
 attendance:
   early_threshold: <%= ENV['SCRIPTED_BOT_EARLY_THRESHOLD'] || 45 %>
-  late_threshold: <%= ENV['SCRIPTED_BOT_LATE_THRESHOLD'] || 5 %>
+  late_threshold: <%= ENV['SCRIPTED_BOT_LATE_THRESHOLD'] || 4 %>
   class_days:
     tuesday:
-      hour: 11
-      minute: 0
+      hour: 21
+      minute: 40
     wednesday:
       hour: 8
       minute: 50

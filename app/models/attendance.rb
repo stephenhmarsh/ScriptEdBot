@@ -49,7 +49,7 @@ class Attendance < ApplicationRecord
 
   def attended_yet_today?
     if user.attendances.created_today.count > 0
-      errors.add(:already_attended, message: "Thanks for logging in, but you've already attended class today. No points. :(")
+      errors.add(:already_attended, message: "Thanks for logging in, but you've already attended class today. 😉")
       true
     else
       false

@@ -22,7 +22,8 @@ module AttendanceHelper
       Date.today.month,
       Date.today.day,
       start_hour,
-      start_minute).in_time_zone(Settings.time_zone)
+      start_minute,
+      0).in_time_zone(Settings.time_zone)
   end
 
   def current_day_name

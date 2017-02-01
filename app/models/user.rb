@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:github]
 
   has_many :attendances
+  has_many :points, through: :attendances
 
   def self.new_with_session(params, session)
     super.tap do |user|
