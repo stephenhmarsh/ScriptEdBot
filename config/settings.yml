@@ -1,4 +1,4 @@
-time_zone: <%= ENV['SCRIPTED_BOT_TIME_ZONE'] || 'America/New_York' %>
+time_zone: <%= ENV['TZ'] || 'America/New_York' %> # matches heroku TZ variable
 airbrake:
   project_id: <%= ENV['AIRBRAKE_PROJECT_ID'] %>
   project_key: <%= ENV['AIRBRAKE_API_KEY'] %>
@@ -15,8 +15,8 @@ attendance:
   late_threshold: <%= ENV['SCRIPTED_BOT_LATE_THRESHOLD'] || 4 %>
   class_days:
     tuesday:
-      hour: 22
-      minute: 40
+      hour: 8
+      minute: 50
     wednesday:
       hour: 8
       minute: 50
