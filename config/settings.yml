@@ -15,7 +15,7 @@ attendance:
   late_threshold: <%= ENV['SCRIPTED_BOT_LATE_THRESHOLD'] || 4 %>
   class_days:
     tuesday:
-      hour: 21
+      hour: 22
       minute: 40
     wednesday:
       hour: 8
