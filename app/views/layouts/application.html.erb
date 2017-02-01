@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <p>app time: <%= Time.now %></p>
+    <p>in time zone: <%= Time.now.in_time_zone(Settings.time_zone) %></p>
+    <p>new attendance.scheduled_class_time: <%= Attendance.new.get_start_time %></p>
+    <p>created_attendance actual created_at: <%= current_user.try(:attendances).try(:first).try(:created_at) %>
     <%= render partial: 'shared/header' %>
     <% if [notice, alert, flash[:errors]].any? %>
       <div class="container-fluid">
