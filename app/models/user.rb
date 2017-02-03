@@ -3,6 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
   devise :omniauthable, omniauth_providers: [:github]
 
+  belongs_to :course
+  belongs_to :team
   has_many :attendances
   has_many :points, through: :attendances
 
