@@ -7,3 +7,17 @@
     </div>
   </div>
 </div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 offset-4">
+      <center><h4>Leaderboard</h4></center>
+      <ol>
+        <% @leaders = User.all.sort_by do |u| u.total_points end.reverse %>
+        <% @leaders.each do |u| %>
+          <li><%= u.name %>  <span style="float: right;"><%= u.total_points.round.to_s %>pts.</span></li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</div>

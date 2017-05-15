@@ -6,6 +6,10 @@ class User < ApplicationRecord
   has_many :attendances
   has_many :points, through: :attendances
 
+  def total_points
+    self.points.sum(:value)
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.github_data"] && session["devise.github_data"]["extra"]["raw_info"]
