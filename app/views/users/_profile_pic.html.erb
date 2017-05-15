@@ -1,2 +1,2 @@
-<%= image_tag(user.image, size: (size || 100), class: 'profile-pic') %>
+<%= image_tag(user.image, size: size, class: 'profile-pic') %>
 <kbd><%= pluralize(user.points.sum(:value).to_i, 'pt').gsub(' ','') %></kbd>
